@@ -2,6 +2,11 @@ require("./node_modules/bootstrap/dist/css/bootstrap.min.css")
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
+var _ = require('lodash');
+
+function sortBy () {
+	return _.sortBy(this , value);
+}
 
 var Container = React.createClass({
 	getInitialState: function() {
@@ -32,13 +37,28 @@ var Container = React.createClass({
 			
 			</div>
 			<div className="col-md-4">
+			<SelectTeams data={this.state.data} value='teamName' />
 			<TableLeague data={this.state.data} />
 			</div>
 			</div>
 		);
 	}
 });
-
+var SelectTeams = React.createClass({
+	render: function () {
+		var clubs;
+	//	clubs = this.sortBy.bind(this, this.data.value);
+	//	console.log(sortBy.bind(this.state.data, 'teamName'));
+		if (typeof this.props.data.standing === 'undefined') {
+			return null;
+		} else {
+			console.log(sortBy.bind(this.props.data.standing, 'teamName'));
+		}
+		return ( 
+			<div><h1>select teams </h1></div>
+		)
+	}
+});
 var TableLeague = React.createClass({
 	render: function () {
 		var lists;

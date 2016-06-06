@@ -26,6 +26,9 @@ module.exports = {
 			inline: true
 		},
 	plugins: [
-		new webpack.NoErrorsPlugin()
+		new webpack.NoErrorsPlugin({
+			$: "jquery",
+      		jQuery: "jquery"
+		})
 	]
 };

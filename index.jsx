@@ -1,12 +1,11 @@
-import $ from 'jquery';
 require("./node_modules/bootstrap/dist/css/bootstrap.min.css")
-require("./node_modules/bootstrap/js/dropdown.js")
 import React from 'react';
 import ReactDOM from 'react-dom';
+import $ from 'jquery';
 var _ = require('lodash');
 
-function sortBy (targetData, value) {
-	return _.sortBy(targetData , value);
+function sortBy () {
+	return _.sortBy(this , value);
 }
 
 var Container = React.createClass({
@@ -53,20 +52,10 @@ var SelectTeams = React.createClass({
 		if (typeof this.props.data.standing === 'undefined') {
 			return null;
 		} else {
-			clubs = sortBy(this.props.data.standing, this.props.value);
-			clubs = clubs.map(function(c) {
-				return (<li><a href="#" url={c._links.team.href}>{c.teamName}</a></li>);
-			})
+			console.log(sortBy.bind(this.props.data.standing, 'teamName'));
 		}
 		return ( 
-			<div className="dropdown">
-			 <button className="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-    			Clubs
-    				<span className="caret"></span>
-  				</button>
-				<ul className="dropdown-menu" aria-labelledby="dropdownMenu1">{clubs}</ul>
-			</div>
-			
+			<div><h1>select teams </h1></div>
 		)
 	}
 });

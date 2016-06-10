@@ -1,12 +1,14 @@
+
 require("./node_modules/bootstrap/dist/css/bootstrap.min.css")
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
+require("./node_modules/bootstrap/dist/js/bootstrap.min.js");
+
+import TableLeague from "./Components/table";
+import SelectTeams from "./Components/selectTeams";
 var _ = require('lodash');
 
-function sortBy (targetData, value) {
-	return _.sortBy(targetData , value);
-}
 
 var Container = React.createClass({
 	getInitialState: function() {
@@ -44,62 +46,7 @@ var Container = React.createClass({
 		);
 	}
 });
-var SelectTeams = React.createClass({
-	render: function () {
-		var clubs;
-	//	clubs = this.sortBy.bind(this, this.data.value);
-	//	console.log(sortBy.bind(this.state.data, 'teamName'));
-		if (typeof this.props.data.standing === 'undefined') {
-			return null;
-		} else {
-			clubs = sortBy(this.props.data.standing, this.props.value);
-			clubs = clubs.map(function(c) {
-				return (<li><a href="#" url={c._links.team.href}>{c.teamName}</a></li>);
-			})
-		}
-		return ( 
-			<div className="dropdown">
-			 <button className="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-    			Clubs
-    				<span className="caret"></span>
-  				</button>
-				<ul className="dropdown-menu" aria-labelledby="dropdownMenu1">{clubs}</ul>
-			</div>
-		)
-	}
-});
-var TableLeague = React.createClass({
-	render: function () {
-		var lists;
-		if (typeof this.props.data.standing === 'undefined') {
-			return null;
-		} else {
-		lists = this.props.data.standing.map(function(team) {
-				return (
-					<tr><td>{team.teamName}</td><td>{team.points}</td></tr>
-				)
-			})
-		}
-	
-		return (
-			<table className="table">
-				<thead>
-				<tr>
-				<th>
-				Clubs
-				</th>
-				<th>
-				Points
-				</th>
-				</tr>
-				</thead>
-				<tbody>
-				{lists}
-				</tbody>
-			</table>
-    	);
-	}
-})
+
 
 ReactDOM.render(
      <Container title="EPL App" url="http://api.football-data.org/v1/soccerseasons/398/leagueTable"/>,document.getElementById('myApp')

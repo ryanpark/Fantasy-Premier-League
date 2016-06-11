@@ -14,7 +14,10 @@ module.exports = {
 		filename: 'bundle.js'
 	},
 	resolve: {
-		extensions: ['', '.js', '.jsx']
+		extensions: ['', '.js', '.jsx'],
+        alias: {
+            jquery: "webpack-dev-server/client/web_modules/jquery/jquery-1.8.1.js"
+		}
 	},
 	module: {
 		loaders: loaders

@@ -40,6 +40,7 @@ var Container = React.createClass({
 			</div>
 			<div className="col-md-4">
 			<SelectTeams data={this.state.data} value='teamName' />
+			
 			<TableLeague data={this.state.data} />
 			</div>
 			</div>

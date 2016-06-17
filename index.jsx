@@ -34,7 +34,7 @@ var Container = React.createClass({
   	},
 	render : function() {
 		return (
-			<div><h1>{this.state.data.leagueCaption}</h1>
+			<div><h1>this.state.data.leagueCaption</h1>
 			<div className="col-md-6">
 			
 			</div>

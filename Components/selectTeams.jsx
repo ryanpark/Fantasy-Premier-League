@@ -17,7 +17,7 @@ var SelectTeams = React.createClass({
 			headers: {'X-Auth-Token': '05cc4cef572747059c533ac416045756'},
 			success: function(data) {
 				this.setState({data: data});
-				console.log(this.state.data)
+				
 			}.bind(this),
 			error: function(xhr, status, err) {
 				console.error('sad');

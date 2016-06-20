@@ -35,13 +35,16 @@ var Container = React.createClass({
 	render : function() {
 		return (
 			<div><h1>this.state.data.leagueCaption</h1>
-			<div className="col-md-6">
+			<div className="col-md-5">
 			
 			</div>
-			<div className="col-md-4">
+			<div className="col-md-6">
+			<div className="col-md-6">
 			<SelectTeams data={this.state.data} value='teamName' />
-			
+			</div>
+			<div className="col-md-6">
 			<TableLeague data={this.state.data} />
+			</div>
 			</div>
 			</div>
 		);

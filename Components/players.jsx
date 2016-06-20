@@ -5,22 +5,20 @@ var Players = React.createClass({
     	return {all:[]};
   	},
    getPlayers : function(dataUrl) {
-		$.ajax({
+		 $.ajax({
 			url: this.props.url,
 			dataType: 'json',
 			cache: false,
 			headers: {'X-Auth-Token': '05cc4cef572747059c533ac416045756'},
 			success: function(data) {
-               
 				this.setState({players: data});
-               
 			}.bind(this),
 			error: function(xhr, status, err) {
 				console.error('sad');
 			}.bind(this)
 		});
 	},   
-    componentDidMount  : function () {
+    componentWillReceiveProps  : function () {
         this.getPlayers();
     },
    render : function () {

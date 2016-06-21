@@ -18,8 +18,12 @@ var Players = React.createClass({
 			}.bind(this)
 		});
 	},   
-    componentWillReceiveProps  : function () {
-        this.getPlayers();
+    componentWillUpdate  : function () {
+       this.getPlayers();
+    },
+    componentDidMount : function() {
+       this.getPlayers();
+       this.setState({})
     },
    render : function () {
        var lists;

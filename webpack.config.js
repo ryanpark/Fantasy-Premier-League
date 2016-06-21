@@ -20,11 +20,17 @@ module.exports = {
 		loaders: loaders
 	},
 	devServer: {
+		 headers: {
+			"Access-Control-Allow-Origin": "*",
+			"Access-Control-Allow-Methods": "GET",
+			"Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
+   	 	},
 		contentBase: "./public",
 			noInfo: true, //  --no-info option
 			hot: true,
 			inline: true
 		},
+		
 	plugins: [
 		new webpack.NoErrorsPlugin(),
 		new webpack.ProvidePlugin({

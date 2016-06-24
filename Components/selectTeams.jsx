@@ -10,7 +10,8 @@ var SelectTeams = React.createClass({
     	return {data: []};
   	},
 	getTeams : function(dataUrl) {
-		$.ajax({
+		var self = this;
+		var teams = $.ajax({
 			url: dataUrl,
 			dataType: 'json',
 			cache: false,
@@ -20,23 +21,32 @@ var SelectTeams = React.createClass({
 			}.bind(this),
 			error: function(xhr, status, err) {
 				console.error('sad');
-			}.bind(this)
-		});
+			}
+		}),
+		  players = teams.then(function(data) {
+             // .then() returns a new promise
+			 console.log(data._links.players.href)
+             return $.ajax({
+				url: data._links.players.href,
+				dataType: 'json',
+				cache: false,
+				headers: {'X-Auth-Token': '05cc4cef572747059c533ac416045756'},
+				success: function(data) {
+					this.setState({players: data});
+					console.log(this.state)
+				}.bind(self),
+				error: function(xhr, status, err) {
+					console.error('sad');
+				}
+             });
+         });
+		 
 	},
     handleClick: function(c) {
         this.getTeams(c)
     },
-	componentDidMount : function () {
-		this.handleClick();	
-		this.getTeams();
-	},
-	selectPlayers : function() {
-		console.log(this.state)	
-	},
 	render: function () {
 		var clubs , self = this;
-	//	clubs = this.sortBy.bind(this, this.data.value);
-	//	console.log(sortBy.bind(this.state.data, 'teamName'));
 		if (typeof this.props.data.standing === 'undefined') {
 			return null;
 		} else {
@@ -56,7 +66,7 @@ var SelectTeams = React.createClass({
   				</button>
 				<ul className="dropdown-menu" aria-labelledby="dropdownMenu1">{clubs}</ul>
 			</div>
-			<Team data={this.state.data} selectPlayers={this.selectPlayers}/>
+			<Team data={this.state.data} selectPlayers={this.state.players}/>
 			</div>
 		)
 	}

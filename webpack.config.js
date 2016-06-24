@@ -20,11 +20,7 @@ module.exports = {
 		loaders: loaders
 	},
 	devServer: {
-		 headers: {
-			"Access-Control-Allow-Origin": "*",
-			"Access-Control-Allow-Methods": "GET",
-			"Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
-   	 	},
+		headers: { "Access-Control-Allow-Origin": "*" },
 		contentBase: "./public",
 			noInfo: true, //  --no-info option
 			hot: true,

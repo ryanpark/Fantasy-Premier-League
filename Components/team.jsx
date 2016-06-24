@@ -1,21 +1,22 @@
 import React from 'react';
-import Players from "./players";
 
 var Team = React.createClass({
-   getInitialState: function() {
-    	return {selectedUrl:[]};
-   },
    render : function () {
-       var urls;
-       if (typeof this.props.data._links === 'undefined') {
-         
+      
+       if (typeof this.props.selectPlayers === 'undefined') {
            return null;
        } else {
-          
+         var playerLists;
+         playerLists = this.props.selectPlayers.players.map(function(p) {
+              return (<li>{p.name}</li>)
+         }.bind(this));
+         
          return (
            <div>
-                <h3>{this.props.data.name}</h3>
-                <Players url= {this.props.data._links.players.href} />
+            <h3>{this.props.data.name}</h3>
+                <ul className="list-unstyled">
+                    {playerLists}
+                </ul>
            </div>
           );     
        }

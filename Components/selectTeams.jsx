@@ -50,6 +50,7 @@ var SelectTeams = React.createClass({
 		if (typeof this.props.data.standing === 'undefined') {
 			return null;
 		} else {
+		
 			clubs = sortBy(this.props.data.standing, this.props.value);
 			clubs = clubs.map(function(c) {
 				return (<li><a onClick={this.handleClick.bind(this, c._links.team.href)}  data-url={c._links.team.href}>{c.teamName}</a></li>);

@@ -1,15 +1,17 @@
 
 require("./node_modules/bootstrap/dist/css/bootstrap.min.css")
+require("./public/style/style.css")
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 require("./node_modules/bootstrap/dist/js/bootstrap.min.js");
 
+
 import TableLeague from "./Components/table";
 import SelectTeams from "./Components/selectTeams";
+
 var _ = require('lodash');
-
-
+ 
 var Container = React.createClass({
 	getInitialState: function() {
     	return {data: []};

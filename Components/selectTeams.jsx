@@ -9,6 +9,9 @@ var SelectTeams = React.createClass({
 	getInitialState: function() {
     	return {data: []};
   	},
+	alertMe: function() {
+		console.log(this.state);	
+	},
 	getTeams : function(dataUrl) {
 		var self = this;
 		var teams = $.ajax({
@@ -33,14 +36,13 @@ var SelectTeams = React.createClass({
 				headers: {'X-Auth-Token': '05cc4cef572747059c533ac416045756'},
 				success: function(data) {
 					this.setState({players: data});
-					console.log(this.state)
+					this.alertMe();
 				}.bind(self),
 				error: function(xhr, status, err) {
 					console.error('sad');
 				}
              });
          });
-		 
 	},
     handleClick: function(c) {
         this.getTeams(c)
@@ -50,7 +52,7 @@ var SelectTeams = React.createClass({
 		if (typeof this.props.data.standing === 'undefined') {
 			return null;
 		} else {
-		
+			
 			clubs = sortBy(this.props.data.standing, this.props.value);
 			clubs = clubs.map(function(c) {
 				return (<li><a onClick={this.handleClick.bind(this, c._links.team.href)}  data-url={c._links.team.href}>{c.teamName}</a></li>);

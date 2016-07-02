@@ -7,36 +7,8 @@ function sortBy (targetData, value) {
 
 var SelectTeams = React.createClass({
 	getInitialState: function() {
-    	return {data: [], selected: {defenders:[] , midfields:[] , forwards:[], keepers :[]}};
+    	return {data: []};
   	},
-	renderPlayers: function() {
-		this.state.players.players.map(function(p) {
-			  switch (p.position) {
-                case 'Centre Back':
-                case 'Left-Back':
-                case 'Right-Back':
-				this.setState({list: this.state.selected.defenders.push(p)});
-                break;
-                case 'Defensive Midfield':
-                case 'Central Midfield':
-                case 'Attacking Midfield':
-                case 'Right Midfield':
-                case 'Left Midfield':
-				this.setState({list: this.state.selected.midfields.push(p)});
-                break;
-                case 'Left Wing':
-                case 'Right Wing':
-                case 'Centre Forward':
-				this.setState({list: this.state.selected.forwards.push(p)});
-                break;
-                case 'Keeper':
-				this.setState({list: this.state.selected.keepers.push(p)});
-                break;
-			  }
-		}.bind(this));
-		
-		console.log(this.state)
-	},
 	getTeams : function(dataUrl) {
 		var self = this;
 		var teams = $.ajax({
@@ -52,16 +24,13 @@ var SelectTeams = React.createClass({
 			}
 		}),
 		  players = teams.then(function(data) {
-             // .then() returns a new promise
-			 console.log(data._links.players.href)
              return $.ajax({
 				url: data._links.players.href,
 				dataType: 'json',
 				cache: false,
 				headers: {'X-Auth-Token': '05cc4cef572747059c533ac416045756'},
 				success: function(data) {
-					this.setState({players: data});
-					this.renderPlayers();
+					this.setState({selectedPlayers: data});
 				}.bind(self),
 				error: function(xhr, status, err) {
 					console.error('sad');
@@ -70,7 +39,7 @@ var SelectTeams = React.createClass({
          });
 	},
     handleClick: function(c) {
-		this.setState({list:0, selected: {defenders:[] , midfields:[] , forwards:[], keepers :[]}});
+		this.setState({selectedPlayers:''});
         this.getTeams(c);
     },
 	componentDidMount : function () {
@@ -98,7 +67,7 @@ var SelectTeams = React.createClass({
   				</button>
 				<ul className="dropdown-menu" aria-labelledby="dropdownMenu1">{clubs}</ul>
 			</div>
-			<Team data={this.state.data} players={this.state.selected}/>
+			<Team data={this.state.data} players={this.state.selectedPlayers} />
 			</div>
 		)
 	}

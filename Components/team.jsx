@@ -3,33 +3,44 @@ var d3 = require('d3-format');
 
 
 var Team = React.createClass({
-   componentWillReceiveProps  : function() {
-    
-   },
    render : function () {
-      
        if (typeof this.props.players === 'undefined') {
            return null;
        } else {
-          // console.log(this.props)
+           if (typeof this.props.players.players === 'object') {
+               var selectedPlayers = {keepers:[],forwards:[],defenders:[],midfielder:[]}; 
+               var pushLists = _.map(this.props.players.players, function (e) {
+                   if (['Keeper'].indexOf(e.position) >= 0) {
+                      selectedPlayers.keepers.push(<li>{e.name} <button className="btn btn-default"> Add</button></li>);
+                    }
+                   if (['Left Wing','Right Wing','Centre Forward'].indexOf(e.position) >= 0) {
+                     selectedPlayers.forwards.push(<li>{e.name}</li>);
+                    }
+                    if (['Centre Back','Left-Back','Right-Back'].indexOf(e.position) >= 0) {
+                     selectedPlayers.defenders.push(<li>{e.name}</li>);
+                    }
+                    if (['Defensive Midfield','Central Midfield','Attacking Midfield','Right Midfield','Left Midfield'].indexOf(e.position) >= 0) {
+                     selectedPlayers.midfielder.push(<li>{e.name}</li>);
+                    }
+               });
+            }
+		}
         return (
            <div>
             <h3>{this.props.data.name}</h3>
                 <ul className="list-unstyled">
                     <h4>Keepers</h4>
-                   
+                    {selectedPlayers.keepers}
                     <h4>Defenders</h4>
-                    
+                     {selectedPlayers.defenders}
                     <h4>Midfielders</h4>
-                   
+                     {selectedPlayers.midfielder}
                     <h4>Forwards</h4>
-                   
+                     {selectedPlayers.forwards}
                 </ul>
            </div>
           );     
        }
-      
-   } 
 });
 
 

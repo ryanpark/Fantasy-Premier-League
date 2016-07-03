@@ -1,3 +1,15 @@
 .dropdown a {
     cursor: pointer;
 }
+
+.player i {
+    display:none;
+    margin-left:5px;
+}
+.player:hover i {
+    display:inline;
+    text-decoration:none;
+}
+a {
+    cursor: pointer;
+}

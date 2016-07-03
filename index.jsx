@@ -10,6 +10,7 @@ require("./node_modules/bootstrap/dist/js/bootstrap.min.js");
 
 import TableLeague from "./Components/table";
 import SelectTeams from "./Components/selectTeams";
+import SelectPlayers from "./Components/selectPlayers";
 
 var _ = require('lodash');
  
@@ -39,7 +40,7 @@ var Container = React.createClass({
 		return (
 			<div><h1>this.state.data.leagueCaption</h1>
 			<div className="col-md-5">
-			
+			<SelectPlayers />
 			</div>
 			<div className="col-md-6">
 			<div className="col-md-6">

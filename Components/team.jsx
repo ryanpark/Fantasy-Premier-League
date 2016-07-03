@@ -2,16 +2,19 @@ import React from 'react';
 var d3 = require('d3-format');
 
 var Team = React.createClass({
+   handleClick : function(i, props) {
+       console.log(props[i]);
+   },
    render : function () {
        if (typeof this.props.players === 'undefined') {
            return null;
        } else {
            if (typeof this.props.players.players === 'object') {
                var selectedPlayers = {keepers:[],forwards:[],defenders:[],midfielder:[]}; 
-               var pushLists = _.map(this.props.players.players, function (e) {
+               var pushLists = _.map(this.props.players.players, function (e , i) {
                    if (['Keeper'].indexOf(e.position) >= 0) {
-                      selectedPlayers.keepers.push(<li><a className="player">{e.name}<i className="fa fa-plus-circle"></i></a></li>);
-                    }
+                      selectedPlayers.keepers.push(<li><a className="player" onClick={this.handleClick.bind(this, i, this.props.players.players)}>{e.name}<i className="fa fa-plus-circle"></i></a></li>);
+                    };
                    if (['Left Wing','Right Wing','Centre Forward'].indexOf(e.position) >= 0) {
                      selectedPlayers.forwards.push(<li><a className="player">{e.name}<i className="fa fa-plus-circle"></i></a></li>);
                     }
@@ -21,8 +24,8 @@ var Team = React.createClass({
                     if (['Defensive Midfield','Central Midfield','Attacking Midfield','Right Midfield','Left Midfield'].indexOf(e.position) >= 0) {
                      selectedPlayers.midfielder.push(<li><a className="player">{e.name}<i className="fa fa-plus-circle"></i></a></li>);
                     }
-               });
-            }
+               }.bind(this))
+            };
 		}
         return (
            <div>

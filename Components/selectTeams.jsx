@@ -45,6 +45,12 @@ var SelectTeams = React.createClass({
 	componentDidMount : function () {
 		
 	},
+	updatePlayers : function(state) {
+		this.setState({
+			test : state
+		})		
+		console.log(state)
+	},
 	render: function () {
 		var clubs , self = this;
 		if (typeof this.props.data.standing === 'undefined') {
@@ -67,7 +73,7 @@ var SelectTeams = React.createClass({
   				</button>
 				<ul className="dropdown-menu" aria-labelledby="dropdownMenu1">{clubs}</ul>
 			</div>
-			<Team data={this.state.data} players={this.state.selectedPlayers} />
+			<Team data={this.state.data} players={this.state.selectedPlayers} onUpdate={this.updatePlayers.bind(null, this)}/>
 			</div>
 		)
 	}

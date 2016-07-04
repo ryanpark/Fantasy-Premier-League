@@ -16,7 +16,7 @@ var _ = require('lodash');
  
 var Container = React.createClass({
 	getInitialState: function() {
-    	return {data: []};
+    	return {data: [], test :'test'};
   	},
 	servicesApi: function() {
     	$.ajax({
@@ -40,7 +40,7 @@ var Container = React.createClass({
 		return (
 			<div><h1>this.state.data.leagueCaption</h1>
 			<div className="col-md-5">
-			<SelectPlayers />
+			<SelectPlayers data = {this.state.data} />
 			</div>
 			<div className="col-md-6">
 			<div className="col-md-6">

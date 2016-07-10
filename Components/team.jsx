@@ -3,9 +3,10 @@ var d3 = require('d3-format');
 
 var Team = React.createClass({
    handleClick : function(i, props) {
-       console.log(props[i])
-       this.props.onUpdate({test : props[i]});
-       console.log(this.state)
+       
+       this.props.onUpdate({left : props[i]});
+      
+     //  console.log(this.state)
    },
    render : function () {
        if (typeof this.props.players === 'undefined') {

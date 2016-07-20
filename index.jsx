@@ -36,16 +36,21 @@ var Container = React.createClass({
 	componentDidMount: function() {
 		this.servicesApi();
   	},
-
+	test : function (newState) {
+		this.setState(newState)
+		console.log(this.state)
+	},
 	render : function() {
 		return (
 			<div><h1>this.state.data.leagueCaption</h1>
+			 <div><span>{this.props.left}</span></div>
 			<div className="col-md-5">
-			<SelectPlayers data = {this.state.data} />
+			<SelectPlayers data = {this.state.data} players={this.state.test.left} />
 			</div>
 			<div className="col-md-6">
 			<div className="col-md-6">
-			<SelectTeams data={this.state.data} value='teamName'/>
+			<SelectTeams data={this.state.data} value='teamName' onTestUpdate={this.test.bind(this)}/>
+			
 			</div>
 			<div className="col-md-6">
 			<TableLeague data={this.state.data} />

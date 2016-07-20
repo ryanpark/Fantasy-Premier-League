@@ -47,8 +47,8 @@ var SelectTeams = React.createClass({
 	},
 	onRightGrandChildUpdate: function( newState ) {
 	//	console.log(newState)
-       this.setState(newState);
-	   console.log(this.state)
+	   this.props.onTestUpdate({test: newState})
+       //this.setState(newState);
     },
 	render: function () {
 		var clubs , self = this;

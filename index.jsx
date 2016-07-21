@@ -36,16 +36,18 @@ var Container = React.createClass({
 	componentDidMount: function() {
 		this.servicesApi();
   	},
-
+    onUpdatePlayers : function (newState) {
+		this.setState(newState);
+	},
 	render : function() {
 		return (
 			<div><h1>this.state.data.leagueCaption</h1>
 			<div className="col-md-5">
-			<SelectPlayers data = {this.state.data} />
+			<SelectPlayers data = {this.state.data} players= {this.state.selectedPlayers}/>
 			</div>
 			<div className="col-md-6">
 			<div className="col-md-6">
-			<SelectTeams data={this.state.data} value='teamName'/>
+			<SelectTeams data={this.state.data} value='teamName' bindPlayers={this.onUpdatePlayers.bind(this)}/>
 			</div>
 			<div className="col-md-6">
 			<TableLeague data={this.state.data} />

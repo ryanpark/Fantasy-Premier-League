@@ -13,3 +13,12 @@
 a {
     cursor: pointer;
 }
+.loadingWrapper {
+    position: relative;
+}
+.fa-spinner {
+    color:#337ab7; left:50%;
+}
+#loading {
+    position: absolute; height:100%; background: #fff; width:100%; 
+}

@@ -16,19 +16,28 @@ var SelectTeams = React.createClass({
 			dataType: 'json',
 			cache: false,
 			headers: {'X-Auth-Token': '05cc4cef572747059c533ac416045756'},
+			beforeSend : function() {
+				this.setState({loading: true});					
+			}.bind(self),
 			success: function(data) {
-				this.setState({data: data});
-			}.bind(this),
+			//	this.setState({data: data});
+			}.bind(self),
 			error: function(xhr, status, err) {
 				console.error('sad');
 			}
 		}),
 		  players = teams.then(function(data) {
+			  
              return $.ajax({
 				url: data._links.players.href,
 				dataType: 'json',
 				cache: false,
 				headers: {'X-Auth-Token': '05cc4cef572747059c533ac416045756'},
+				beforeSend : function() {
+					console.log(this.state)
+					//this.setState({loading: true});
+					console.log(this.state)	
+				}.bind(self),
 				success: function(data) {
 					this.setState({selectedPlayers: data});
 				}.bind(self),
@@ -37,18 +46,20 @@ var SelectTeams = React.createClass({
 				}
              });
          });
+		
 	},
     handleClick: function(c) {
 		this.setState({selectedPlayers:''});
+		//console.log(this.state.selectedPlayers)
         this.getTeams(c);
+		//console.log(this.state.selectedPlayers)
+		console.log(this.state)
     },
 	componentDidMount : function () {
 		
 	},
-	onRightGrandChildUpdate: function( newState ) {
-	//	console.log(newState)
-	   this.props.onTestUpdate({test: newState})
-       //this.setState(newState);
+	onUpdatePlayers: function( newState ) {
+		this.props.bindPlayers(newState);
     },
 	render: function () {
 		var clubs , self = this;
@@ -72,7 +83,7 @@ var SelectTeams = React.createClass({
   				</button>
 				<ul className="dropdown-menu" aria-labelledby="dropdownMenu1">{clubs}</ul>
 			</div>
-			<Team data={this.state.data} players={this.state.selectedPlayers} onUpdate={this.onRightGrandChildUpdate.bind(this)}/>
+			<Team data={this.state.data} players={this.state.selectedPlayers} onUpdate={this.onUpdatePlayers.bind(this)}/>
 			</div>
 		)
 	}

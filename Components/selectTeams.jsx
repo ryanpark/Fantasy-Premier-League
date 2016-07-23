@@ -7,7 +7,7 @@ function sortBy (targetData, value) {
 
 var SelectTeams = React.createClass({
 	getInitialState: function() {
-    	return {data: []};
+    	return {data: [] , isLoaded: 'up'};
   	},
 	getTeams : function(dataUrl) {
 		var self = this;
@@ -17,7 +17,7 @@ var SelectTeams = React.createClass({
 			cache: false,
 			headers: {'X-Auth-Token': '05cc4cef572747059c533ac416045756'},
 			beforeSend : function() {
-				this.setState({loading: true});					
+								
 			}.bind(self),
 			success: function(data) {
 			//	this.setState({data: data});
@@ -34,12 +34,11 @@ var SelectTeams = React.createClass({
 				cache: false,
 				headers: {'X-Auth-Token': '05cc4cef572747059c533ac416045756'},
 				beforeSend : function() {
-					console.log(this.state)
 					//this.setState({loading: true});
-					console.log(this.state)	
 				}.bind(self),
 				success: function(data) {
 					this.setState({selectedPlayers: data});
+					this.setState({isLoaded: true});
 				}.bind(self),
 				error: function(xhr, status, err) {
 					console.error('sad');
@@ -49,11 +48,8 @@ var SelectTeams = React.createClass({
 		
 	},
     handleClick: function(c) {
-		this.setState({selectedPlayers:''});
-		//console.log(this.state.selectedPlayers)
+		this.setState({selectedPlayers:'' , isLoaded: false});
         this.getTeams(c);
-		//console.log(this.state.selectedPlayers)
-		console.log(this.state)
     },
 	componentDidMount : function () {
 		
@@ -76,14 +72,14 @@ var SelectTeams = React.createClass({
 			<div>
 			<div className="dropdown">
 			 <button className="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-
     			{this.state.data.shortName || 'Clubs'}
-
     				<span className="caret"></span>
   				</button>
 				<ul className="dropdown-menu" aria-labelledby="dropdownMenu1">{clubs}</ul>
 			</div>
-			<Team data={this.state.data} players={this.state.selectedPlayers} onUpdate={this.onUpdatePlayers.bind(this)}/>
+			{ this.state.isLoaded == 'up' ? <div></div>: ''}
+			{ !this.state.isLoaded ? <i className="fa fa-spinner fa-spin fa-3x fa-fw"></i> : <Team data={this.state.data} players={this.state.selectedPlayers} onUpdate={this.onUpdatePlayers.bind(this)}/>}
+			
 			</div>
 		)
 	}

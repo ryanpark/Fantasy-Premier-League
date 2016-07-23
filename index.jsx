@@ -16,7 +16,7 @@ var _ = require('lodash');
  
 var Container = React.createClass({
 	getInitialState: function() {
-    	return {data: [], test :'test'};
+    	return {data: []};
   	},
 	servicesApi: function() {
     	$.ajax({

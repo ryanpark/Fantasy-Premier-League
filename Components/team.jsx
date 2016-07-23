@@ -29,7 +29,7 @@ var Team = React.createClass({
 		}
         return (
            <div className="loadingWrapper">
-            <div id="loading" className="selectedPlayers"><i className="fa fa-spinner fa-spin fa-3x fa-fw"></i></div>
+            <div className="selectedPlayers"></div>
             <h3>{this.props.data.name}</h3>
                 <ul className="list-unstyled">
                     <h4>Keepers</h4>

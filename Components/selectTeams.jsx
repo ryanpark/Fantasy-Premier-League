@@ -37,8 +37,7 @@ var SelectTeams = React.createClass({
 					//this.setState({loading: true});
 				}.bind(self),
 				success: function(data) {
-					this.setState({selectedPlayers: data});
-					this.setState({isLoaded: true});
+					this.setState({selectedPlayers: data , isLoaded: true});
 				}.bind(self),
 				error: function(xhr, status, err) {
 					console.error('sad');

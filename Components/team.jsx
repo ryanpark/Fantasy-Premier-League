@@ -2,8 +2,16 @@ import React from 'react';
 var d3 = require('d3-format');
 
 var Team = React.createClass({
+   getinitialstate : function () {
+       
+   },
    handleClick : function(i, props) {
-       this.props.onUpdate({selectedPlayers : props[i]});
+      /* this.props.onUpdate({selectedPlayers : props[i]});*/
+       this.props.onUpdate(props[i]);
+       /*
+       this.props.onUpdate({selectedPlayers :[{
+           'keeper' :'22'
+       }]});*/
    },
    render : function () {
        if (typeof this.props.players === 'undefined') {
@@ -29,7 +37,7 @@ var Team = React.createClass({
 		}
         return (
            <div className="loadingWrapper">
-            <div className="selectedPlayers"></div>
+            <div id="" className="selectedPlayers"></div>
             <h3>{this.props.data.name}</h3>
                 <ul className="list-unstyled">
                     <h4>Keepers</h4>

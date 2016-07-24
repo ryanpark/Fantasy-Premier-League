@@ -13,10 +13,10 @@ import SelectTeams from "./Components/selectTeams";
 import SelectPlayers from "./Components/selectPlayers";
 
 var _ = require('lodash');
- 
+
 var Container = React.createClass({
 	getInitialState: function() {
-    	return {data: []};
+    	return {data:[], p:{'Keeper' : [] , 'Defenders': [] , 'Midfield' : [], 'Forwards' : []}}
   	},
 	servicesApi: function() {
     	$.ajax({
@@ -26,7 +26,6 @@ var Container = React.createClass({
 			cache: false,
 			success: function(data) {
 				this.setState({data: data});
-			
 			}.bind(this),
 			error: function(xhr, status, err) {
 				console.error(this.props.url, status, err.toString());
@@ -34,18 +33,29 @@ var Container = React.createClass({
 		});
   	},
 	componentDidMount: function() {
-		this.servicesApi();
+		return this.servicesApi();
   	},
     onUpdatePlayers : function (newState) {
-		this.setState(newState);
+		var pos;
+		
+		if (newState.position.includes('Back')) {
+			pos = 'Defenders'
+		} else if (newState.position.includes('Midfield')){
+			pos = 'Midfield'
+		} else if (newState.position.includes('Forward') || newState.position.includes('Wing')) {
+			pos = 'Forwards'
+		} else {
+			pos = newState.position;
+		}
+		
+		return this.state.p[pos].push(newState);
 	},
 	render : function() {
 		return (
 			<div><h1>this.state.data.leagueCaption</h1>
-			 <div><span>{this.props.left}</span></div>
+			<div><span>{this.props.left}</span></div>
 			<div className="col-md-5">
-
-			<SelectPlayers data = {this.state.data} players= {this.state.selectedPlayers}/>
+			<SelectPlayers data = {this.state.data} players= {this.state.p} />
 			</div>
 			<div className="col-md-6">
 			<div className="col-md-6">

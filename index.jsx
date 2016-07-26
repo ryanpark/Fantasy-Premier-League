@@ -16,7 +16,7 @@ var _ = require('lodash');
 
 var Container = React.createClass({
 	getInitialState: function() {
-    	return {data:[], p:{'Keeper' : [] , 'Defenders': [] , 'Midfield' : [], 'Forwards' : []}}
+    	return {data:[] , p:{'Keeper' : [] , 'Defenders': [] , 'Midfield' : [], 'Forwards' : []}}
   	},
 	servicesApi: function() {
     	$.ajax({
@@ -47,15 +47,22 @@ var Container = React.createClass({
 		} else {
 			pos = newState.position;
 		}
+		var duplicated = _.some(this.state.p[pos], newState);
+		if (duplicated == true) {return false};
 		
-		return this.state.p[pos].push(newState);
+		this.setState({
+			p: Object.assign(this.state.p, {
+				[pos]: this.state.p[pos].concat(newState)
+			})
+		})
+		
 	},
 	render : function() {
 		return (
-			<div><h1>this.state.data.leagueCaption</h1>
+			<div><h1>{this.state.data.leagueCaption}</h1>
 			<div><span>{this.props.left}</span></div>
 			<div className="col-md-5">
-			<SelectPlayers data = {this.state.data} players= {this.state.p} />
+			<SelectPlayers data = {this.state.data} players= {this.state.p} a={this.state.a} />
 			</div>
 			<div className="col-md-6">
 			<div className="col-md-6">

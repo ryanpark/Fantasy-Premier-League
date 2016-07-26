@@ -6,12 +6,7 @@ var Team = React.createClass({
        
    },
    handleClick : function(i, props) {
-      /* this.props.onUpdate({selectedPlayers : props[i]});*/
        this.props.onUpdate(props[i]);
-       /*
-       this.props.onUpdate({selectedPlayers :[{
-           'keeper' :'22'
-       }]});*/
    },
    render : function () {
        if (typeof this.props.players === 'undefined') {

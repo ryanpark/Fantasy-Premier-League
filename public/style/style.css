@@ -22,3 +22,6 @@ a {
 #loading {
     position: absolute; height:100%; background: #fff; width:100%; 
 }
+.playersContainer {
+    height:500px;
+}

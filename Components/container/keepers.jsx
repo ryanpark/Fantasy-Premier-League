@@ -1,6 +1,6 @@
 import React from 'react';
 
-var Defenders = React.createClass({
+var Keepers = React.createClass({
    render : function () {
        
        if (typeof this.props.list === 'undefined') {
@@ -10,15 +10,13 @@ var Defenders = React.createClass({
                return <div>{e.name}</div>
            });
        }
-        return (
-            <div>
-            { this.props.list.length > 0 ? <h3>Defenders</h3> : ''  }
-            <div>{lists}</div>
-            </div>)
+        return (<div>
+         { this.props.list.length > 0 ? <h3>Keepers</h3> : ''  }
+        <div>{lists}</div></div>)
    } 
     
 });
 
 
 
-export default Defenders; 
+export default Keepers; 

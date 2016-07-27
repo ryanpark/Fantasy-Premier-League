@@ -37,13 +37,30 @@ var SelectTeams = React.createClass({
 					//this.setState({loading: true});
 				}.bind(self),
 				success: function(data) {
-					this.setState({selectedPlayers: data , isLoaded: true});
+					this.setState({selectedPlayers: data});
 				}.bind(self),
 				error: function(xhr, status, err) {
 					console.error('sad');
 				}
              });
-         });
+         }).then(function (data) {
+			 return $.ajax({
+				url: data._links.team.href,
+				dataType: 'json',
+				cache: false,
+				headers: {'X-Auth-Token': '05cc4cef572747059c533ac416045756'},
+				beforeSend : function() {
+					//this.setState({loading: true});
+				}.bind(self),
+				success: function(data) {
+					this.setState({logo: data.crestUrl , isLoaded: true});
+					console.log(this.state)
+				}.bind(self),
+				error: function(xhr, status, err) {
+					//console.error('sad');
+				}
+             });
+		 })
 		
 	},
     handleClick: function(c) {
@@ -75,7 +92,9 @@ var SelectTeams = React.createClass({
     				<span className="caret"></span>
   				</button>
 				<ul className="dropdown-menu" aria-labelledby="dropdownMenu1">{clubs}</ul>
+				<img src={this.state.logo} width="25%" height="25%"/>
 			</div>
+			
 			{ this.state.isLoaded == 'up' ? <div></div>: ''}
 			{ !this.state.isLoaded ? <i className="fa fa-spinner fa-spin fa-3x fa-fw"></i> : <Team data={this.state.data} players={this.state.selectedPlayers} onUpdate={this.onUpdatePlayers.bind(this)}/>}
 			

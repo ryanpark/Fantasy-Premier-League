@@ -16,7 +16,7 @@ var _ = require('lodash');
 
 var Container = React.createClass({
 	getInitialState: function() {
-    	return {data:[] , p:{'Keeper' : [] , 'Defenders': [] , 'Midfield' : [], 'Forwards' : []}}
+    	return {data:[] , p:{'Keeper' : [2] , 'Defenders': [4] , 'Midfield' : [4], 'Forwards' : [3]}}
   	},
 	servicesApi: function() {
     	$.ajax({
@@ -38,6 +38,7 @@ var Container = React.createClass({
     onUpdatePlayers : function (newState) {
 		var pos;
 		
+		
 		if (newState.position.includes('Back')) {
 			pos = 'Defenders'
 		} else if (newState.position.includes('Midfield')){
@@ -47,8 +48,16 @@ var Container = React.createClass({
 		} else {
 			pos = newState.position;
 		}
+		
 		var duplicated = _.some(this.state.p[pos], newState);
-		if (duplicated == true) {return false};
+		
+		function maxLength(pos) {
+			if (this.state.p[pos].length > this.state.p[pos][0]) {
+				return true;
+			} 
+		}
+		
+		if (duplicated == true || maxLength.call(this, pos)) {return false};
 		
 		this.setState({
 			p: Object.assign(this.state.p, {

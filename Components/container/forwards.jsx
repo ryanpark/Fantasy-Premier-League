@@ -3,14 +3,24 @@ import React from 'react';
 var Forwards = React.createClass({
    render : function () {
        
-       if (typeof this.props.list === 'undefined') {
+       if (this.props.list.length == 1) {
            return null
        } else {
+         var logoUrl = this.props.url;
           var lists =  this.props.list.map(function (e) {
-               return <div>{e.name}</div>
+              if (typeof e.name == 'undefined') { 
+                return;   
+              } else {
+               return <div><img src={logoUrl} width="10%" height="10%" /> <a href="#" className="">{e.name}</a> <i className="fa fa-minus-circle"></i></div>   
+              }
+               
            });
        }
-        return (<div> { this.props.list.length > 0 ? <h3>Forwards</h3> : ''  }<div>{lists}</div></div>)
+        return (<div>
+            { this.props.list.length > 1 ? <h3>Forwards</h3> : ''  }
+                <div>{lists}   </div>
+                </div>
+            )
    } 
     
 });

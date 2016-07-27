@@ -19,6 +19,9 @@ a {
 .fa-spinner {
     color:#337ab7; left:50%;
 }
+.fa-minus-circle {
+    color:#337ab7; margin-left:5px;
+}
 #loading {
     position: absolute; height:100%; background: #fff; width:100%; 
 }

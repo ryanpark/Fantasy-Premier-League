@@ -36,6 +36,7 @@ var Container = React.createClass({
 		return this.servicesApi();
   	},
     onUpdatePlayers : function (newState) {
+		console.log(newState)
 		var pos;
 		
 		
@@ -64,18 +65,22 @@ var Container = React.createClass({
 				[pos]: this.state.p[pos].concat(newState)
 			})
 		})
-		
+	
+	},
+	onUpldateLogo : function (logo) {
+		this.setState({logoUrl:logo})
+		console.log(this.state)
 	},
 	render : function() {
 		return (
 			<div><h1>{this.state.data.leagueCaption}</h1>
 			<div><span>{this.props.left}</span></div>
 			<div className="col-md-5">
-			<SelectPlayers data = {this.state.data} players= {this.state.p} a={this.state.a} />
+			<SelectPlayers data = {this.state.data} players= {this.state.p} logo={this.state.logoUrl} />
 			</div>
 			<div className="col-md-6">
 			<div className="col-md-6">
-			<SelectTeams data={this.state.data} value='teamName' bindPlayers={this.onUpdatePlayers.bind(this)}/>
+			<SelectTeams data={this.state.data} value='teamName' bindPlayers={this.onUpdatePlayers.bind(this)} bindLogo={this.onUpldateLogo.bind(this)} />
 			</div>
 			<div className="col-md-6">
 			<TableLeague data={this.state.data} />

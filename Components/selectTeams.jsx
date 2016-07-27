@@ -54,7 +54,7 @@ var SelectTeams = React.createClass({
 				}.bind(self),
 				success: function(data) {
 					this.setState({logo: data.crestUrl , isLoaded: true});
-					console.log(this.state)
+					this.props.bindLogo(data.crestUrl)
 				}.bind(self),
 				error: function(xhr, status, err) {
 					//console.error('sad');

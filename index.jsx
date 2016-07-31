@@ -4,6 +4,8 @@ require("./public/style/style.css")
 require("./node_modules/font-awesome/css/font-awesome.css");
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
 import $ from 'jquery';
 require("./node_modules/bootstrap/dist/js/bootstrap.min.js");
 

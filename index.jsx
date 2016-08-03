@@ -4,8 +4,9 @@ require("./public/style/style.css")
 require("./node_modules/font-awesome/css/font-awesome.css");
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { render } from 'react-dom';
+import { createStore } from 'redux';
 import { Provider } from 'react-redux';
+import { AddPlayers } from './Components/reducers/addPlayers'
 import $ from 'jquery';
 require("./node_modules/bootstrap/dist/js/bootstrap.min.js");
 
@@ -38,7 +39,7 @@ var Container = React.createClass({
 		return this.servicesApi();
   	},
     onUpdatePlayers : function (newState) {
-		console.log(newState)
+		
 		var pos;
 		
 		
@@ -71,9 +72,14 @@ var Container = React.createClass({
 	},
 	onUpldateLogo : function (logo) {
 		this.setState({logoUrl:logo})
-		console.log(this.state)
+		
 	},
 	render : function() {
+		
+		let store = createStore(AddPlayers);
+		console.log(store.getState());
+		
+		console.log(store)
 		return (
 			<div><h1>{this.state.data.leagueCaption}</h1>
 			<div><span>{this.props.left}</span></div>

@@ -80,8 +80,8 @@ var SelectTeams = React.createClass({
 		} else {
 			
 			clubs = sortBy(this.props.data.standing, this.props.value);
-			clubs = clubs.map(function(c) {
-				return (<li><a onClick={this.handleClick.bind(this, c._links.team.href)}  data-url={c._links.team.href}>{c.teamName}</a></li>);
+			clubs = clubs.map(function(c , i) {
+				return (<li key={i}><a key={i} onClick={this.handleClick.bind(this, c._links.team.href)}  data-url={c._links.team.href}>{c.teamName}</a></li>);
 			}.bind(this))
 		}
 		return ( 
@@ -96,7 +96,7 @@ var SelectTeams = React.createClass({
 			</div>
 			
 			{ this.state.isLoaded == 'up' ? <div></div>: ''}
-			{ !this.state.isLoaded ? <i className="fa fa-spinner fa-spin fa-3x fa-fw"></i> : <Team data={this.state.data} players={this.state.selectedPlayers} onUpdate={this.onUpdatePlayers.bind(this)}/>}
+			{ !this.state.isLoaded ? <i className="fa fa-spinner fa-spin fa-3x fa-fw"></i> : <Team data={this.state.data} players={this.state.selectedPlayers} onUpdate={this.onUpdatePlayers.bind(null, this)}/>}
 			
 			</div>
 		)

@@ -6,9 +6,9 @@ var TableLeague = React.createClass({
 		if (typeof this.props.data.standing === 'undefined') {
 			return null;
 		} else {
-		lists = this.props.data.standing.map(function(team) {
+		lists = this.props.data.standing.map(function(team , i) {
 				return (
-					<tr><td>{team.teamName}</td><td>{team.points}</td></tr>
+					<tr key={i}><td key={i}>{team.teamName}</td><td>{team.points}</td></tr>
 				)
 			})
 		}

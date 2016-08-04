@@ -76,10 +76,11 @@ var Container = React.createClass({
 	},
 	render : function() {
 		
-		let store = createStore(AddPlayers);
-		console.log(store.getState());
 		
-		console.log(store)
+		
+		
+		
+	
 		return (
 			<div><h1>{this.state.data.leagueCaption}</h1>
 			<div><span>{this.props.left}</span></div>
@@ -88,7 +89,7 @@ var Container = React.createClass({
 			</div>
 			<div className="col-md-6">
 			<div className="col-md-6">
-			<SelectTeams data={this.state.data} value='teamName' bindPlayers={this.onUpdatePlayers.bind(this)} bindLogo={this.onUpldateLogo.bind(this)} />
+			<SelectTeams data={this.state.data} value='teamName' bindPlayers={this.onUpdatePlayers.bind(null,this)} bindLogo={this.onUpldateLogo.bind(null,this)} />
 			</div>
 			<div className="col-md-6">
 			<TableLeague data={this.state.data} />

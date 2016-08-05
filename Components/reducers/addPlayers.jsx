@@ -1,14 +1,17 @@
-export const AddPlayers = (state = {}, action) => {
-  switch (action.type) {
-    case 'ADD_PLAYER':
-      return {
-        id: action.id,
-        text: action.text,
-        completed: false
-      }
-    default:
-      return state
-  }
+export const Counter = (state=1, action) => {
+	
+  switch(action.type) {
+				case 'INCREMENT':
+				return state + 1;
+				case 'DECREMENT':
+				return state - 1;
+				default:
+				return state;
+			}
 }
 
-export default AddPlayers;
+export default Counter;
+
+
+    
+    

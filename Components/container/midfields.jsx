@@ -27,4 +27,4 @@ var Midfields = React.createClass({
 
 
 
-export default Midfields; 
+export default Midfields

@@ -13,16 +13,17 @@ require("./node_modules/bootstrap/dist/js/bootstrap.min.js");
 import TableLeague from "./Components/table";
 import SelectTeams from "./Components/selectTeams";
 import SelectPlayers from "./Components/selectPlayers";
-import Counter from './Components/reducers/addPlayers';
+import addReducer from './Components/reducers/addPlayers';
 
 
 var _ = require('lodash');
 
-
-
-
-
+/*
 class CounterUI extends React.Component {
+	constructor(props) {
+    super(props);
+    this.state = {count: 9999, a : 'aaaaa'};
+  }
   increment() {
     this.props.dispatch({
       type: 'INCREMENT'
@@ -34,10 +35,11 @@ class CounterUI extends React.Component {
     });
   }
   render() {
-	
+    
     return (<div>
 		<h1>CounterUI</h1>
-        {this.props.state}
+      
+
       <div>
         <button onClick={this.increment.bind(this)}>+</button>
         <button onClick={this.decrement.bind(this)}>-</button>
@@ -45,17 +47,9 @@ class CounterUI extends React.Component {
     </div>
     )
   }
-}
+}*/
 
-const mapStateToProps = function (state) {
-  return {state};
-}
-
-
-
-const CounterApp = connect(mapStateToProps)(CounterUI);
-
-console.log(CounterApp);
+const initialiseStates = {test:'test', data:[] , p:{'Keeper' : [2] , 'Defenders': [4] , 'Midfield' : [4], 'Forwards' : [3]}};
 
 
 var Container = React.createClass({
@@ -63,6 +57,8 @@ var Container = React.createClass({
     	return {data:[] , p:{'Keeper' : [2] , 'Defenders': [4] , 'Midfield' : [4], 'Forwards' : [3]}}
   	},
 	servicesApi: function() {
+		
+		/*
 		fetch(this.props.url)  
 			.then(  
 				function(response) {  
@@ -79,8 +75,8 @@ var Container = React.createClass({
 			)  
 			.catch(function(err) {  
 				console.log('Fetch Error :-S', err);  
-			});
-		/*
+			});*/
+		
     	$.ajax({
 			url: this.props.url,
 			dataType: 'json',
@@ -92,7 +88,7 @@ var Container = React.createClass({
 			error: function(xhr, status, err) {
 				console.error(this.props.url, status, err.toString());
 			}.bind(this)
-		});*/
+		});
   	},
 	componentDidMount: function() {
 		return this.servicesApi();
@@ -129,24 +125,40 @@ var Container = React.createClass({
 	onUpldateLogo : function (logo) {
 		this.setState({logoUrl:logo})
 	},
+	increment() {
+    this.props.dispatch({
+      type: 'INCREMENT',
+			pos : 'Keeper',
+			count: 'YEah bitch'
+    });
+		
+  },
+  decrement() {
+    this.props.dispatch({
+      type: 'DECREMENT',
+			pos : 'Keeper',
+			count: 'This is Forwards'
+    });
+  },
 	render : function() {
 		//create store	
-		let store = createStore(Counter);
+		
 		
 		
 		return (
-			<div><h1>{this.state.data.leagueCaption}</h1>
-			
-			 <Provider store={store}>
-        <CounterApp />
-      </Provider>
+			<div><h1>{/*this.state.data.leagueCaption*/}</h1>
 		
+		  <span>{/*this.props.appstate.test*/}</span>
 			<div><span>{this.props.left}</span></div>
 			<div className="col-md-5">
 			<SelectPlayers data = {this.state.data} players= {this.state.p} logo={this.state.logoUrl} />
 			</div>
 			<div className="col-md-6">
 			<div className="col-md-6">
+			 <div>
+        <button onClick={this.increment.bind(this)}>+</button>
+        <button onClick={this.decrement.bind(this)}>-</button>
+      </div>
 			<SelectTeams data={this.state.data} value='teamName' bindPlayers={this.onUpdatePlayers.bind(this)} bindLogo={this.onUpldateLogo.bind(this)} />
 			</div>
 			<div className="col-md-6">
@@ -158,8 +170,28 @@ var Container = React.createClass({
 	}
 });
 
+let store = createStore(addReducer , initialiseStates);
+
+const mapStateToProps = function (state , ownProps) {
+  return {appstate : state , ownProps: ownProps};
+}
+
+const App = connect(mapStateToProps)(Container);
+
+
+//console.log(store.getState());
+class FeplApp extends React.Component {
+  render() {
+    return (
+      <Provider store={store}>
+         <App title="EPL App" url="http://api.football-data.org/v1/soccerseasons/398/leagueTable"></App>
+      </Provider>
+    )
+  }
+} 
+
 
 ReactDOM.render(
-     <Container title="EPL App" url="http://api.football-data.org/v1/soccerseasons/398/leagueTable"></Container>,document.getElementById('myApp')
+     <FeplApp />,document.getElementById('myApp')
 );
 

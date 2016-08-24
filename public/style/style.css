@@ -1,0 +1,30 @@
+.dropdown a {
+    cursor: pointer;
+}
+
+.player i {
+    display:none;
+    margin-left:5px;
+}
+.player:hover i {
+    display:inline;
+    text-decoration:none;
+}
+a {
+    cursor: pointer;
+}
+.loadingWrapper {
+    position: relative;
+}
+.fa-spinner {
+    color:#337ab7; left:50%;
+}
+.fa-minus-circle {
+    color:#337ab7; margin-left:5px;
+}
+#loading {
+    position: absolute; height:100%; background: #fff; width:100%; 
+}
+.playersContainer {
+    height:500px;
+}

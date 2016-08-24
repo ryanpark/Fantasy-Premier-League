@@ -20,17 +20,20 @@ module.exports = {
 		loaders: loaders
 	},
 	devServer: {
+		headers: { "Access-Control-Allow-Origin": "*" },
 		contentBase: "./public",
 			noInfo: true, //  --no-info option
 			hot: true,
 			inline: true
 		},
+		
 	plugins: [
 		new webpack.NoErrorsPlugin(),
 		new webpack.ProvidePlugin({
 			$: "jquery",
 			jQuery: "jquery",
-			"window.jQuery": "jquery"
+			"window.jQuery": "jquery",
+			d3: 'd3'
 		})
 	]
 };

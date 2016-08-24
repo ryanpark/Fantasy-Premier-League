@@ -6,8 +6,8 @@ var Defenders = React.createClass({
        if (this.props.list.length == 1) {
            return null
        } else {
-          const logoUrl = this.props.url;
-          lists =  this.props.list.map(e => typeof e.name =='undefined' ? '' : <div><img src={logoUrl} width="10%" height="10%" /> <a href="#" className="">{e.name}</a> <i className="fa fa-minus-circle"></i></div>)
+         
+          lists =  this.props.list.map(e => typeof e.name =='undefined' ? '' : <div><img src={e.logo} width="10%" height="10%" /> <a href="#" className="">{e.name}</a> <i className="fa fa-minus-circle"></i></div>)
        }
         return (
             <div>
@@ -18,7 +18,5 @@ var Defenders = React.createClass({
    } 
     
 });
-
-
 
 export default Defenders; 

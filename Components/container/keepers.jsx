@@ -6,12 +6,13 @@ var Keepers = React.createClass({
        if (this.props.list.length == 1) {
            return null
        } else {
-       var logoUrl = this.props.url;
+      
           var lists =  this.props.list.map(function (e) {
+             
               if (typeof e.name == 'undefined') { 
                 return;   
               } else {
-               return <div><img src={logoUrl} width="10%" height="10%" /> <a href="#" className="">{e.name}</a> <i className="fa fa-minus-circle"></i></div>   
+               return <div><img src={e.logo} width="10%" height="10%" /> <a href="#" className="">{e.name}</a> <i className="fa fa-minus-circle"></i></div>   
               }
                
            });

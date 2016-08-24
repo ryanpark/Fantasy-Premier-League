@@ -12,16 +12,16 @@ export const addReducer = (state= initialiseStates, action) => {
 			
   switch(action.type) {
 	  
-	case 'INCREMENT':
-	
-	console.log(state)
-			/*
-			return Object.assign(state.p, {
-				[action.pos]: state.p[action.pos].push(action.count)
-			})*/
-	return Object.assign(
-		{ a: [...state.p[action.pos] , action] 
-	})
+	case 'addPlayer':
+		var state = {p: Object.assign(state.p, {
+			[action.pos]: state.p[action.pos].concat(action)
+		})}
+		
+		return state
+  	case  'clear' :
+    state = initialState
+	return state
+  
 			  /*
 				return Object.assign(
 					state , { p : {[action.pos] : [...state.p[action.pos], action]}
@@ -53,16 +53,10 @@ export const addReducer = (state= initialiseStates, action) => {
 						p: 'sad'
 					}
 				]*/
-				case 'DECREMENT':
-				console.log(state)
-				 return Object.assign(
-				  //state, { p : [...state.p , action] },{action}
-				  
-				  state, { p: [...state.p , action] },{action} 
-				)
-				default:
-				return state;
-			}
+			
+	default:
+	return state;
+	}
 }
 
 export default addReducer;

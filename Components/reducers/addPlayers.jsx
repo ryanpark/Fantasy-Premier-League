@@ -1,4 +1,5 @@
 
+import initialiseStates from "../../index";
 
 export const addReducer = (state= initialiseStates, action) => {
 	
@@ -18,9 +19,14 @@ export const addReducer = (state= initialiseStates, action) => {
 		})}
 		
 		return state
+	
+	case 'removePlayer':
+		alert('removed');
+	return {state : 'aaa'}
+		 		
   	case  'clear' :
-    state = initialState
-	return state
+	
+	return initialiseStates
   
 			  /*
 				return Object.assign(

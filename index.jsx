@@ -74,7 +74,7 @@ var Container = React.createClass({
 			pos = newState.position;
 		}
 		
-	  const currentState = store.getState();
+	    const currentState = store.getState();
 		const duplicated = _.some(currentState.p[pos], newState);
 		const maxLength = (pos) => {	
 			if (currentState.p[pos].length > currentState.p[pos][0]) {
@@ -87,8 +87,8 @@ var Container = React.createClass({
 		newState.pos = pos;
 		newState.logo = this.state.logoUrl;
 	  
-		return this.props.dispatch(newState)
-		 
+		 this.props.dispatch(newState)
+		 console.log(store.getState())
 	},
 	onUpldateLogo : function (logo) {
 		this.setState({logoUrl:logo})
@@ -97,9 +97,8 @@ var Container = React.createClass({
 		//create store
 		
 		return (
-			<div><h1>{/*this.state.data.leagueCaption*/}</h1>
-		
-		  <span>{/*this.props.appstate.test*/}</span>
+			<div><h1>{/*this.state.data.leagueCaption*/}</h1>	
+		    <span>{/*this.props.appstate.test*/}</span>
 			<div><span>{this.props.left}</span></div>
 			<div className="col-md-5">
 			<SelectPlayers data = {this.state.data} players= {this.props.appstate}  />
@@ -140,3 +139,4 @@ ReactDOM.render(
      <FeplApp />,document.getElementById('myApp')
 );
 
+export default store;

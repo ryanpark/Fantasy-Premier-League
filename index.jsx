@@ -74,7 +74,7 @@ var Container = React.createClass({
 			pos = newState.position;
 		}
 		
-	  const currentState = store.getState();
+	  	const currentState = store.getState();
 		const duplicated = _.some(currentState.p[pos], newState);
 		const maxLength = (pos) => {	
 			if (currentState.p[pos].length > currentState.p[pos][0]) {
@@ -140,3 +140,4 @@ ReactDOM.render(
      <FeplApp />,document.getElementById('myApp')
 );
 
+export default store;

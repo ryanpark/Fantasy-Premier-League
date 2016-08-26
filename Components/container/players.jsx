@@ -6,6 +6,7 @@ class Players extends React.Component {
      this.props.bindRemovePlayer(d);
  }   
  render() {
+
      const keepers =  this.props.list.Keeper.map(e => typeof e.name =='undefined' ? '' : <div><img src={e.logo} width="10%" height="10%" /> <a href="#" className="">{e.name}</a> <i className="fa fa-minus-circle removeIcon" onClick={this.removePlayer.bind(this, e)}></i></div>)
      const defenders =  this.props.list.Defenders.map(e => typeof e.name =='undefined' ? '' : <div><img src={e.logo} width="10%" height="10%" /> <a href="#" className="">{e.name}</a> <i className="fa fa-minus-circle removeIcon"></i></div>)
      const midfields =  this.props.list.Midfield.map(e => typeof e.name =='undefined' ? '' : <div><img src={e.logo} width="10%" height="10%" /> <a href="#" className="">{e.name}</a> <i className="fa fa-minus-circle removeIcon"></i></div>)
@@ -24,6 +25,11 @@ class Players extends React.Component {
      )
  
  }
+
+     return <div>players</div>
+ }   
+    
+
 }
 
 

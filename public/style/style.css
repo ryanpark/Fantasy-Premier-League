@@ -10,7 +10,7 @@
     display:inline;
     text-decoration:none;
 }
-a {
+a , .removeIcon {
     cursor: pointer;
 }
 .loadingWrapper {

@@ -8,6 +8,9 @@ var SelectPlayers = React.createClass({
       store.dispatch({type:'clear'})
       console.log(store.getState())
    },
+   removePlayer: function() {
+     alert('re')  
+   },
    render : function () {
        if (this.props.players.p.Keeper === 'undefined') {
            return (<div>empty></div>)
@@ -15,7 +18,7 @@ var SelectPlayers = React.createClass({
         return (
             <div>
             <div className="playersContainer">
-                <Players list = {this.props.players.p} />
+                <Players list = {this.props.players.p} bindRemovePlayer={this.removePlayer.bind(this)}/>
             </div>
             <button className="btn btn-default" onClick={this.clearPlayers}>Start Over</button>
             </div>

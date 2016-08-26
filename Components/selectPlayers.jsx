@@ -1,8 +1,4 @@
 import React from 'react';
-import Defenders from "./container/defenders";
-import Keepers from "./container/keepers";
-import Forwards from "./container/forwards";
-import Midfields from "./container/midfields";
 import Players from "./container/players";
 
 var SelectPlayers = React.createClass({

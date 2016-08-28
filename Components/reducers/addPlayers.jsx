@@ -1,4 +1,5 @@
 
+var _ = require('lodash');
 
 export const addReducer = (state= initialiseStates, action) => {		
   switch(action.type) {  
@@ -8,11 +9,11 @@ export const addReducer = (state= initialiseStates, action) => {
 		})}
 	return state
   	case  'clear' :
-    state = initialState
+    var state = {p: state}
 	return state;	
 	case 'removePlayer' :
 	var state = {p: Object.assign(state.p, {
-			[action.pos]: state.p[action.pos].slice(2)
+			[action.pos]: state.p[action.pos].slice(0, action.removeNo).concat(state.p[action.pos].slice(action.removeNo + 1))
 		})}
 	return state		
 	default:

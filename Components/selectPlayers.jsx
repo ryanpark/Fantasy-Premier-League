@@ -2,14 +2,26 @@ import React from 'react';
 import Players from "./container/players";
 import store from "../index";
 
+var _ = require('lodash');
+
 var SelectPlayers = React.createClass({
    clearPlayers : function () {
       store.dispatch({type:'clear'})
    },
    removePlayer: function(e) {
-       e.type = 'removePlayer'
-       store.dispatch(e);
-       console.log(store.getState())
+      e.type = 'removePlayer'
+      const slicedNumber = store.getState().p[e.pos].map(function(i , n) {
+           if ( e.name == i.name) {
+               return n
+           }
+       }).filter(function(x) {
+         return typeof x !== 'undefined';
+       })
+      e.removeNo = slicedNumber[0];
+     
+     // console.log(e)
+      store.dispatch(e);
+    //  console.log(store.getState())
    },
    render : function () {
         return (

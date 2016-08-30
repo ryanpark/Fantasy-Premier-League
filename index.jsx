@@ -16,9 +16,11 @@ import SelectPlayers from "./Components/selectPlayers";
 import addReducer from './Components/reducers/addPlayers';
 
 
-var _ = require('lodash');
+const _ = require('lodash');
+const d3 = require('d3-format');
 
-const initialiseStates = {p:{'Keeper' : [2] , 'Defenders': [4] , 'Midfield' : [4], 'Forwards' : [3]}};
+
+const initialiseStates = {budget:100000000, p:{'Keeper' : [2] , 'Defenders': [4] , 'Midfield' : [4], 'Forwards' : [3]}};
 
 
 var Container = React.createClass({
@@ -86,22 +88,21 @@ var Container = React.createClass({
 		newState.type = 'addPlayer';
 		newState.pos = pos;
 		newState.logo = this.state.logoUrl;
-	  
-		return this.props.dispatch(newState)
-		 
+		newState.marketValue = newState.marketValue.slice(0,-1).replace(/,/g, '');
+		return this.props.dispatch(newState) 
 	},
 	onUpldateLogo : function (logo) {
 		this.setState({logoUrl:logo})
 	},
 	render : function() {
 		//create store
+		let totalBudget = d3.format("s")(this.props.appstate.budget);
 		
 		return (
-			<div><h1>{/*this.state.data.leagueCaption*/}</h1>
-		
-		  <span>{/*this.props.appstate.test*/}</span>
+		  <div><h1>{/*this.state.data.leagueCaption*/}</h1>
 			<div><span>{this.props.left}</span></div>
 			<div className="col-md-5">
+			<h3>{totalBudget}</h3>
 			<SelectPlayers data = {this.state.data} players= {this.props.appstate}  />
 			</div>
 			<div className="col-md-6">
@@ -109,6 +110,7 @@ var Container = React.createClass({
 			<SelectTeams data={this.state.data} value='teamName' bindPlayers={this.onUpdatePlayers.bind(this)} bindLogo={this.onUpldateLogo.bind(this)} />
 			</div>
 			<div className="col-md-6">
+			
 			<TableLeague data={this.state.data} />
 			</div>
 			</div>

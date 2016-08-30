@@ -16,16 +16,16 @@ var Team = React.createClass({
                var selectedPlayers = {keepers:[],forwards:[],defenders:[],midfielder:[]}; 
                var pushLists = _.map(this.props.players.players, function (e , i) {
                    if (['Keeper'].indexOf(e.position) >= 0) {
-                      selectedPlayers.keepers.push(<li><a className="player" onClick={this.handleClick.bind(this, i, this.props.players.players)}>{e.name}<i className="fa fa-plus-circle"></i></a></li>);
+                      selectedPlayers.keepers.push(<li><a className="player" onClick={this.handleClick.bind(this, i, this.props.players.players)}>{e.name} </a><span>{e.marketValue}</span> </li>);
                     };
                    if (['Left Wing','Right Wing','Centre Forward'].indexOf(e.position) >= 0) {
-                     selectedPlayers.forwards.push(<li><a className="player" onClick={this.handleClick.bind(this, i, this.props.players.players)}>{e.name}<i className="fa fa-plus-circle"></i></a></li>);
+                     selectedPlayers.forwards.push(<li><a className="player" onClick={this.handleClick.bind(this, i, this.props.players.players)}>{e.name} </a><span>{e.marketValue}</span></li>);
                     }
                     if (['Centre Back','Left-Back','Right-Back'].indexOf(e.position) >= 0) {
-                     selectedPlayers.defenders.push(<li><a className="player" onClick={this.handleClick.bind(this, i, this.props.players.players)}>{e.name}<i className="fa fa-plus-circle"></i></a></li>);
+                     selectedPlayers.defenders.push(<li><a className="player" onClick={this.handleClick.bind(this, i, this.props.players.players)}>{e.name} </a><span>{e.marketValue}</span></li>);
                     }
                     if (['Defensive Midfield','Central Midfield','Attacking Midfield','Right Midfield','Left Midfield'].indexOf(e.position) >= 0) {
-                     selectedPlayers.midfielder.push(<li><a className="player" onClick={this.handleClick.bind(this, i, this.props.players.players)}>{e.name}<i className="fa fa-plus-circle"></i></a></li>);
+                     selectedPlayers.midfielder.push(<li><a className="player" onClick={this.handleClick.bind(this, i, this.props.players.players)}>{e.name} </a><span>{e.marketValue}</span></li>);
                     }
                }.bind(this))
             };

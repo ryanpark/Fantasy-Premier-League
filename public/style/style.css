@@ -10,6 +10,14 @@
     display:inline;
     text-decoration:none;
 }
+.player + i {
+    display:none;
+}
+.player:hover + i {
+    color:#333;
+    display: block;
+}
+
 a , .removeIcon {
     cursor: pointer;
 }

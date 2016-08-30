@@ -18,7 +18,7 @@ var SelectPlayers = React.createClass({
          return typeof x !== 'undefined';
        })
       e.removeNo = slicedNumber[0];
-     
+      e.marketValue = e.marketValue.slice(0,-1).replace(/,/g, '');
      // console.log(e)
       store.dispatch(e);
     //  console.log(store.getState())

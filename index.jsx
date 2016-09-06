@@ -6,6 +6,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {createStore} from 'redux';
 import {Provider, connect}  from 'react-redux';
+import { composeResetReducer } from 'redux-reset-store';
 import $ from 'jquery';
 require("./node_modules/bootstrap/dist/js/bootstrap.min.js");
 
@@ -65,7 +66,7 @@ var Container = React.createClass({
   onUpdatePlayers : function (newState) {
 	
 		let pos;
-		
+		console.log(this.props.appstate.budget)
 		if (newState.position.includes('Back')) {
 			pos = 'Defenders'
 		} else if (newState.position.includes('Midfield')){
@@ -88,7 +89,7 @@ var Container = React.createClass({
 		newState.type = 'addPlayer';
 		newState.pos = pos;
 		newState.logo = this.state.logoUrl;
-		newState.marketValue = newState.marketValue.slice(0,-1).replace(/,/g, '');
+		newState.budget = parseInt(newState.marketValue.slice(0,-1).replace(/,/g, ''));
 		return this.props.dispatch(newState) 
 	},
 	onUpldateLogo : function (logo) {
@@ -102,7 +103,7 @@ var Container = React.createClass({
 		  <div><h1>{/*this.state.data.leagueCaption*/}</h1>
 			<div><span>{this.props.left}</span></div>
 			<div className="col-md-5">
-			<h3>{totalBudget}</h3>
+			<h3>{totalBudget} &euro; </h3>
 			<SelectPlayers data = {this.state.data} players= {this.props.appstate}  />
 			</div>
 			<div className="col-md-6">
@@ -142,4 +143,4 @@ ReactDOM.render(
      <FeplApp />,document.getElementById('myApp')
 );
 
-export default store;
+export {store , initialiseStates} 

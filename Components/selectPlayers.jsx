@@ -12,7 +12,7 @@ var SelectPlayers = React.createClass({
             gStore.p[i].splice(1, e.length)
         }
       });
-      store.dispatch({type:'clear', state: clearStored , budget : 100000000 })
+      store.dispatch({type:'clear', state: clearStored , budget : initialiseStates.budget })
    },
    removePlayer: function(e) {
       e.type = 'removePlayer'

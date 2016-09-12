@@ -63,10 +63,10 @@ var Container = React.createClass({
 	componentDidMount: function() {
 		return this.servicesApi();
   	},
-  onUpdatePlayers : function (newState) {
+    onUpdatePlayers : function (newState) {
 	
 		let pos;
-		console.log(this.props.appstate.budget)
+		
 		if (newState.position.includes('Back')) {
 			pos = 'Defenders'
 		} else if (newState.position.includes('Midfield')){
@@ -84,8 +84,8 @@ var Container = React.createClass({
 				return true;
 			}
 		 }
-		if (duplicated == true || maxLength.call(this, pos)) {return false}
-	
+		if (duplicated == true || maxLength.call(this, pos) || store.getState().budget < 0) {return false}
+		
 		newState.type = 'addPlayer';
 		newState.pos = pos;
 		newState.logo = this.state.logoUrl;
@@ -103,7 +103,9 @@ var Container = React.createClass({
 		  <div><h1>{/*this.state.data.leagueCaption*/}</h1>
 			<div><span>{this.props.left}</span></div>
 			<div className="col-md-5">
-			<h3>{totalBudget} &euro; </h3>
+			<h3 className="">{totalBudget} &euro; </h3>
+		    {store.getState().budget < 0 ? <div className="alert alert-danger">
+			<span>Out of Budget</span></div>: ''}
 			<SelectPlayers data = {this.state.data} players= {this.props.appstate}  />
 			</div>
 			<div className="col-md-6">

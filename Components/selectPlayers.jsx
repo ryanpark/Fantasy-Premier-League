@@ -3,17 +3,18 @@ import Players from "./container/players";
 import {store} from "../index";
 import {initialiseStates} from '../index';
 var _ = require('lodash');
-const c = initialiseStates;
+
 var SelectPlayers = React.createClass({
    clearPlayers : function () {
-      
-      store.dispatch({type:'clear', state: c})
-      
+      const gStore = store.getState();
+      const clearStored = _.forEach(gStore.p , function(e,i) {
+        if (e.length > 1) {
+            gStore.p[i].splice(1, e.length)
+        }
+      });
+      store.dispatch({type:'clear', state: clearStored , budget : 100000000 })
    },
    removePlayer: function(e) {
-       
-       
-       console.log(store)
       e.type = 'removePlayer'
       const slicedNumber = store.getState().p[e.pos].map(function(i , n) {
            if ( e.name == i.name) {
@@ -24,9 +25,7 @@ var SelectPlayers = React.createClass({
        })
       e.removeNo = slicedNumber[0];
       e.budget = parseInt(e.marketValue.slice(0,-1).replace(/,/g, ''));
-     // console.log(e)
       store.dispatch(e);
-    //  console.log(store.getState())
    },
    render : function () {
         return (

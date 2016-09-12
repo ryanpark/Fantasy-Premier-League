@@ -16,8 +16,11 @@ export const addReducer = composeResetReducer(function addReducer(state= initial
 		})}
 	return state
  	case  'clear': 
-	var state = action.state;
-	return state
+	var state = {
+		budget : action.budget,
+		p : action.state
+	}
+	return state;
 	case 'removePlayer' :
 	var state = {
 		budget: state.budget + action.budget,

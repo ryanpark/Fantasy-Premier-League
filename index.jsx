@@ -102,7 +102,7 @@ var Container = React.createClass({
 		return (
 		  <div><h1>{/*this.state.data.leagueCaption*/}</h1>
 			<div><span>{this.props.left}</span></div>
-			<div className="col-md-5">
+			<div className="col-md-6">
 			<h3 className="">{totalBudget} &euro; </h3>
 		    {store.getState().budget < 0 ? <div className="alert alert-danger">
 			<span>Out of Budget</span></div>: ''}
@@ -134,7 +134,7 @@ class FeplApp extends React.Component {
   render() {
     return (
       <Provider store={store}>
-         <App title="EPL App" url="http://api.football-data.org/v1/soccerseasons/398/leagueTable"></App>
+         <App title="EPL App" url="http://api.football-data.org/v1/competitions/426/leagueTable"></App>
       </Provider>
     )
   }

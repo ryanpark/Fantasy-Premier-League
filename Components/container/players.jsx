@@ -1,4 +1,9 @@
 import React from 'react';
+import Popover from 'react-bootstrap/lib/Popover';
+import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
+import Button from 'react-bootstrap/lib/Button';
+import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar';
+import Overlay from 'react-bootstrap/lib/Overlay';
 
 
 class Players extends React.Component {
@@ -6,9 +11,24 @@ class Players extends React.Component {
      this.props.bindRemovePlayer(d);
  }   
  render() {
-    
-     
-        const keepers =  this.props.list.Keeper.map(e => typeof e.name =='undefined' ? '' : <div><img src={e.logo} width="10%" height="10%" /> <a href="#" className="">{e.name}</a> <i className="fa fa-minus-circle removeIcon" onClick={this.removePlayer.bind(this, e)}></i></div>)
+        const keepers =  this.props.list.Keeper.map(e => typeof e.name =='undefined' ? '' : <div><img src={e.logo} width="10%" height="10%" />
+        <ButtonToolbar>
+        <Button onClick={this.handleClick}>
+          Holy guacamole!
+        </Button>
+
+        <Overlay
+          show={true}
+          placement="bottom"
+          container={this}
+          containerPadding={20}
+        >
+          <Popover id="popover-contained" title="Popover bottom">
+            <strong>Holy guacamole!</strong> Check this info.
+          </Popover>
+        </Overlay>
+      </ButtonToolbar>
+         <a href="#" className="">{e.name}</a> <i className="fa fa-minus-circle removeIcon" onClick={this.removePlayer.bind(this, e)}></i></div>)
         const defenders =  this.props.list.Defenders.map(e => typeof e.name =='undefined' ? '' : <div><img src={e.logo} width="10%" height="10%" /> <a href="#" className="">{e.name}</a> <i className="fa fa-minus-circle removeIcon" onClick={this.removePlayer.bind(this, e)}></i></div>)
         const midfields =  this.props.list.Midfield.map(e => typeof e.name =='undefined' ? '' : <div><img src={e.logo} width="10%" height="10%" /> <a href="#" className="">{e.name}</a> <i className="fa fa-minus-circle removeIcon" onClick={this.removePlayer.bind(this, e)}></i></div>)
         const forwards =  this.props.list.Forwards.map(e => typeof e.name =='undefined' ? '' : <div><img src={e.logo} width="10%" height="10%" /> <a href="#" className="">{e.name}</a> <i className="fa fa-minus-circle removeIcon" onClick={this.removePlayer.bind(this, e)}></i></div>)     
@@ -24,6 +44,9 @@ class Players extends React.Component {
              <div>{midfields}</div>
              {this.props.list.Forwards.length > 1 ? <h3>Forwards</h3> : ''  }
              <div>{forwards}</div>
+             
+           
+            
              </div>
      )
  

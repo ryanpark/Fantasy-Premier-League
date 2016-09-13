@@ -34,5 +34,6 @@ a , .removeIcon {
     position: absolute; height:100%; background: #fff; width:100%; 
 }
 .playersContainer {
-    height:500px;
+    height:500px; background: url(../images/bg.png); height: 690px;
+    width: 700px;background-position: 50% 50%;
 }

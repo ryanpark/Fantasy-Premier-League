@@ -27,13 +27,28 @@ a , .removeIcon {
 .fa-spinner {
     color:#337ab7; left:50%;
 }
-.fa-minus-circle {
-    color:#337ab7; margin-left:5px;
+.fa-times-circle {
+    color:#e9ff03; margin-left:5px;
 }
 #loading {
     position: absolute; height:100%; background: #fff; width:100%; 
 }
 .playersContainer {
     height:500px; background: url(../images/bg.png); height: 690px;
-    width: 700px;background-position: 50% 50%;
+    width: 700px;background-position: 50% 50%; padding-top:76px;
+}
+.playersContainer div div  {
+    height:140px;
+}
+.playersContainer a {
+    color:#fff;display: inline-block;
+}
+.playersContainer img {
+    display: block; margin:0 auto; width:45%; height:45%;
+}
+.playersContainer .Keepers {
+    text-align:center;
+}
+.playersContainer .Keepers div , .playersContainer .Defenders div, .playersContainer .Midfields div,  .playersContainer .Forwards div {
+    text-align: center; margin:0 auto;     width: 173px ;display: inline-block; margin:0 auto;
 }

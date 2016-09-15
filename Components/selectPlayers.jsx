@@ -33,7 +33,7 @@ var SelectPlayers = React.createClass({
             <div className="playersContainer">
                 <Players list = {this.props.players.p} bindRemovePlayer={this.removePlayer.bind(this)}/>
             </div>
-            <button className="btn btn-default" onClick={this.clearPlayers.bind(this)}>Start Over</button>
+            <button className="btn btn-default" onClick={this.clearPlayers.bind(this)}>Reset</button>
             </div>
         )
    } 

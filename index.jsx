@@ -103,16 +103,16 @@ var Container = React.createClass({
 		  <div><h1>{/*this.state.data.leagueCaption*/}</h1>
 			<div><span>{this.props.left}</span></div>
 			<div className="col-md-6">
-			<h3 className="">{totalBudget} &euro; </h3>
+			<div className="panel panel-default"><div className="panel-body"><h3 className="">Bank : {totalBudget} &euro; </h3></div></div>
 		    {store.getState().budget < 0 ? <div className="alert alert-danger">
 			<span>Out of Budget</span></div>: ''}
 			<SelectPlayers data = {this.state.data} players= {this.props.appstate}  />
 			</div>
 			<div className="col-md-6">
-			<div className="col-md-6">
+			<div className="col-md-5">
 			<SelectTeams data={this.state.data} value='teamName' bindPlayers={this.onUpdatePlayers.bind(this)} bindLogo={this.onUpldateLogo.bind(this)} />
 			</div>
-			<div className="col-md-6">
+			<div className="col-md-5">
 			
 			<TableLeague data={this.state.data} />
 			</div>

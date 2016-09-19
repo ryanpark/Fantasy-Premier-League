@@ -3,7 +3,7 @@
 The Application influenced by [FPL](https://fantasy.premierleague.com/).
 
 
-(https://raw.githubusercontent.com/ryanpark/FEPL---React-App/Redux/public/images/product.png)
+![alt tag] (https://raw.githubusercontent.com/ryanpark/FEPL---React-App/Redux/public/images/product.png)
 
 
 ### RESTful football data.

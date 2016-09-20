@@ -1,12 +1,22 @@
-# react-webpack-babel
-Simple React Webpack Babel Starter Kit
+# Fantasy Premier League  - React App
+
+The Application influenced by [FPL](https://fantasy.premierleague.com/).
 
 
-This is a simple [React](https://facebook.github.io/react/), [Webpack](http://webpack.github.io/) and [Babel](https://babeljs.io/) application with nothing else in it.
+![alt tag] (https://raw.githubusercontent.com/ryanpark/FEPL---React-App/Redux/public/images/product.png)
 
-### What's in it?
 
-Just a simple [index.jsx](./index.jsx), [webpack.config.js](./webpack.config.js) and [index.html](./public/index.html) file.
+### RESTful football data.
+
+
+[http://api.football-data.org/](http://api.football-data.org/) 
+
+
+
+### Dependencies
+
+- Bootstrap
+- Lodash
 
 ### To run
 

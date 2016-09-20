@@ -1,29 +1,43 @@
 import React from 'react';
-import Defenders from "./container/defenders";
-import Keepers from "./container/keepers";
-import Forwards from "./container/forwards";
-import Midfields from "./container/midfields";
+import Players from "./container/players";
+import {store} from "../index";
+import {initialiseStates} from '../index';
+var _ = require('lodash');
 
 var SelectPlayers = React.createClass({
    clearPlayers : function () {
-    
+      const gStore = store.getState();
+      const clearStored = _.forEach(gStore.p , function(e,i) {
+        if (e.length > 1) {
+            gStore.p[i].splice(1, e.length)
+        }
+      });
+      store.dispatch({type:'clear', state: clearStored , budget : initialiseStates.budget })
+   },
+   removePlayer: function(e) {
+      e.type = 'removePlayer'
+      const slicedNumber = store.getState().p[e.pos].map(function(i , n) {
+           if ( e.name == i.name) {
+               return n
+           }
+       }).filter(function(x) {
+         return typeof x !== 'undefined';
+       })
+      e.removeNo = slicedNumber[0];
+      e.budget = parseInt(e.marketValue.slice(0,-1).replace(/,/g, ''));
+      store.dispatch(e);
    },
    render : function () {
         return (
             <div>
             <div className="playersContainer">
-                <Keepers list= {this.props.players.Keeper} url={this.props.logo} />
-                <Defenders list= {this.props.players.Defenders}  url={this.props.logo} />
-                <Forwards list= {this.props.players.Forwards} url={this.props.logo} />
-                <Midfields list= {this.props.players.Midfield} url={this.props.logo} />
+                <Players list = {this.props.players.p} bindRemovePlayer={this.removePlayer.bind(this)}/>
             </div>
-            <button className="btn btn-default" onClick={this.clearPlayers}>Start Over</button>
+            <button className="btn btn-default" onClick={this.clearPlayers.bind(this)}>Reset</button>
             </div>
         )
    } 
     
 });
-
-
 
 export default SelectPlayers;

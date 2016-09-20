@@ -92,7 +92,7 @@ var SelectTeams = React.createClass({
     				<span className="caret"></span>
   				</button>
 				<ul className="dropdown-menu" aria-labelledby="dropdownMenu1">{clubs}</ul>
-				<img src={this.state.logo} width="25%" height="25%"/>
+				<img src={this.state.logo} width="20%" height="20%" className="teamLogo" />
 			</div>
 			
 			{ this.state.isLoaded == 'up' ? <div></div>: ''}

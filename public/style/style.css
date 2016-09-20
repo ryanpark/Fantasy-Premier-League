@@ -10,8 +10,22 @@
     display:inline;
     text-decoration:none;
 }
-a {
+.player + i {
+    display:none;
+}
+.player:hover + i {
+    color:#333;
+    display: block;
+}
+
+a , .removeIcon {
     cursor: pointer;
+}
+.panel-body {
+    text-align: center;
+}
+.panel-body h3 {
+    margin:0px;
 }
 .loadingWrapper {
     position: relative;
@@ -19,12 +33,31 @@ a {
 .fa-spinner {
     color:#337ab7; left:50%;
 }
-.fa-minus-circle {
-    color:#337ab7; margin-left:5px;
+.fa-times-circle {
+    color:#e9ff03; margin-left:5px;
 }
 #loading {
     position: absolute; height:100%; background: #fff; width:100%; 
 }
 .playersContainer {
-    height:500px;
+    height:500px; background: url(../images/bg.png); height: 690px;
+    background-position: 50% 50%; padding-top:76px; margin-bottom:30px; background-color: #38003C;
+}
+.playersContainer div div  {
+    height:140px;
+}
+.playersContainer a {
+    color:#fff;display: inline-block;
+}
+.playersContainer img {
+    display: block; margin:0 auto; width:45%; height:45%;
+}
+.playersContainer .Keepers {
+    text-align:center;
+}
+.playersContainer .Keepers div , .playersContainer .Defenders div, .playersContainer .Midfields div,  .playersContainer .Forwards div {
+    text-align: center; margin:0 auto;     width:200px ;display: inline-block; margin:0 auto;
+}
+.teamLogo {
+    margin-left:10px;
 }

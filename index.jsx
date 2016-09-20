@@ -6,6 +6,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {createStore} from 'redux';
 import {Provider, connect}  from 'react-redux';
+import { composeResetReducer } from 'redux-reset-store';
 import $ from 'jquery';
 require("./node_modules/bootstrap/dist/js/bootstrap.min.js");
 
@@ -13,56 +14,22 @@ require("./node_modules/bootstrap/dist/js/bootstrap.min.js");
 import TableLeague from "./Components/table";
 import SelectTeams from "./Components/selectTeams";
 import SelectPlayers from "./Components/selectPlayers";
-import Counter from './Components/reducers/addPlayers';
+import addReducer from './Components/reducers/addPlayers';
 
 
-var _ = require('lodash');
+const _ = require('lodash');
+const d3 = require('d3-format');
 
 
-
-
-
-class CounterUI extends React.Component {
-  increment() {
-    this.props.dispatch({
-      type: 'INCREMENT'
-    });
-  }
-  decrement() {
-    this.props.dispatch({
-      type: 'DECREMENT'
-    });
-  }
-  render() {
-	
-    return (<div>
-		<h1>CounterUI</h1>
-        {this.props.state}
-      <div>
-        <button onClick={this.increment.bind(this)}>+</button>
-        <button onClick={this.decrement.bind(this)}>-</button>
-      </div>
-    </div>
-    )
-  }
-}
-
-const mapStateToProps = function (state) {
-  return {state};
-}
-
-
-
-const CounterApp = connect(mapStateToProps)(CounterUI);
-
-console.log(CounterApp);
+const initialiseStates = {budget:100000000, p:{'Keeper' : [2] , 'Defenders': [4] , 'Midfield' : [4], 'Forwards' : [3]}};
 
 
 var Container = React.createClass({
 	getInitialState: function() {
-    	return {data:[] , p:{'Keeper' : [2] , 'Defenders': [4] , 'Midfield' : [4], 'Forwards' : [3]}}
+    	return {data:[]}
   	},
 	servicesApi: function() {
+		/*
 		fetch(this.props.url)  
 			.then(  
 				function(response) {  
@@ -79,25 +46,24 @@ var Container = React.createClass({
 			)  
 			.catch(function(err) {  
 				console.log('Fetch Error :-S', err);  
-			});
-		/*
+			});*/
     	$.ajax({
-			url: this.props.url,
-			dataType: 'json',
-			headers: {'X-Auth-Token': '05cc4cef572747059c533ac416045756'},
-			cache: false,
-			success: function(data) {
-				this.setState({data: data});
-			}.bind(this),
-			error: function(xhr, status, err) {
-				console.error(this.props.url, status, err.toString());
-			}.bind(this)
-		});*/
+				url: this.props.url,
+				dataType: 'json',
+				headers: {'X-Auth-Token': '05cc4cef572747059c533ac416045756'},
+				cache: false,
+				success: function(data) {
+					this.setState({data: data});
+				}.bind(this),
+				error: function(xhr, status, err) {
+					console.error(this.props.url, status, err.toString());
+				}.bind(this)
+			});
   	},
 	componentDidMount: function() {
 		return this.servicesApi();
   	},
-  onUpdatePlayers : function (newState) {
+    onUpdatePlayers : function (newState) {
 	
 		let pos;
 		
@@ -111,45 +77,43 @@ var Container = React.createClass({
 			pos = newState.position;
 		}
 		
-		const duplicated = _.some(this.state.p[pos], newState);
+	  	const currentState = store.getState();
+		const duplicated = _.some(currentState.p[pos], newState);
 		const maxLength = (pos) => {	
-			if (this.state.p[pos].length > this.state.p[pos][0]) {
+			if (currentState.p[pos].length > currentState.p[pos][0]) {
 				return true;
 			}
 		 }
-	
-		if (duplicated == true || maxLength.call(this, pos)) {return false}
+		if (duplicated == true || maxLength.call(this, pos) || store.getState().budget < 0) {return false}
 		
-		return this.setState({
-			p: Object.assign(this.state.p, {
-				[pos]: this.state.p[pos].concat(newState)
-			})
-		})
+		newState.type = 'addPlayer';
+		newState.pos = pos;
+		newState.logo = this.state.logoUrl;
+		newState.budget = parseInt(newState.marketValue.slice(0,-1).replace(/,/g, ''));
+		return this.props.dispatch(newState) 
 	},
 	onUpldateLogo : function (logo) {
 		this.setState({logoUrl:logo})
 	},
 	render : function() {
-		//create store	
-		let store = createStore(Counter);
-		
+		//create store
+		let totalBudget = d3.format("s")(this.props.appstate.budget);
 		
 		return (
-			<div><h1>{this.state.data.leagueCaption}</h1>
-			
-			 <Provider store={store}>
-        <CounterApp />
-      </Provider>
-		
+		  <div><h1>{/*this.state.data.leagueCaption*/}</h1>
 			<div><span>{this.props.left}</span></div>
-			<div className="col-md-5">
-			<SelectPlayers data = {this.state.data} players= {this.state.p} logo={this.state.logoUrl} />
+			<div className="col-md-6">
+			<div className="panel panel-default"><div className="panel-body"><h3 className="">Bank : {totalBudget} &euro; </h3></div></div>
+		    {store.getState().budget < 0 ? <div className="alert alert-danger">
+			<span>Out of Budget</span></div>: ''}
+			<SelectPlayers data = {this.state.data} players= {this.props.appstate}  />
 			</div>
 			<div className="col-md-6">
-			<div className="col-md-6">
+			<div className="col-md-5">
 			<SelectTeams data={this.state.data} value='teamName' bindPlayers={this.onUpdatePlayers.bind(this)} bindLogo={this.onUpldateLogo.bind(this)} />
 			</div>
-			<div className="col-md-6">
+			<div className="col-md-5">
+			
 			<TableLeague data={this.state.data} />
 			</div>
 			</div>
@@ -158,8 +122,27 @@ var Container = React.createClass({
 	}
 });
 
+let store = createStore(addReducer , initialiseStates);
+
+const mapStateToProps = function (state , ownProps) {
+  return {appstate : state , ownProps: ownProps};
+}
+
+const App = connect(mapStateToProps)(Container);
+
+class FeplApp extends React.Component {
+  render() {
+    return (
+      <Provider store={store}>
+         <App title="EPL App" url="http://api.football-data.org/v1/competitions/426/leagueTable"></App>
+      </Provider>
+    )
+  }
+} 
+
 
 ReactDOM.render(
-     <Container title="EPL App" url="http://api.football-data.org/v1/soccerseasons/398/leagueTable"></Container>,document.getElementById('myApp')
+     <FeplApp />,document.getElementById('myApp')
 );
 
+export {store , initialiseStates} 

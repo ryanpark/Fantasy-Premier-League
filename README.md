@@ -12,12 +12,6 @@ The Application influenced by [FPL](https://fantasy.premierleague.com/).
 [http://api.football-data.org/](http://api.football-data.org/) 
 
 
-
-### Dependencies
-
-- Bootstrap
-- Lodash
-
 ### To run
 
 * You'll need to have [git](https://git-scm.com/) and [node](https://nodejs.org/en/) installed in your system.

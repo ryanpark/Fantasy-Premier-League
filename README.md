@@ -1,6 +1,6 @@
 # Fantasy Premier League  - React App
 
-The Application influenced by [FPL](https://fantasy.premierleague.com/).
+The Application has been built and influenced by [fantasy.premierleague.com](https://fantasy.premierleague.com/).
 
 
 ![alt tag] (https://raw.githubusercontent.com/ryanpark/FEPL---React-App/Redux/public/images/product.png)
@@ -11,6 +11,14 @@ The Application influenced by [FPL](https://fantasy.premierleague.com/).
 
 [http://api.football-data.org/](http://api.football-data.org/) 
 
+## Dependencies
+
+- Bootstrap
+- Font Awesome
+- Lodash
+- D3 Format
+- Redux
+- jQuery
 
 ### To run
 
